@@ -45,7 +45,7 @@ async function fetchPrayerTimes() {
         params: {
           city: CITY,
           country: COUNTRY,
-          method: 2, // Islamic Society of North America method
+          method: 5, // Egyptian General Authority of Survey
         },
       }
     );
