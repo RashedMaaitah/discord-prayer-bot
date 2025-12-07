@@ -74,9 +74,11 @@ async function fetchPrayerTimes(
       `http://api.aladhan.com/v1/timingsByCity`,
       {
         params: {
+
           city: city,
           country: country,
           method: method,
+
         },
         timeout: 10000, // 10 second timeout
       }
