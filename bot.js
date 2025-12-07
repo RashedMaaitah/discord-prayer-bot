@@ -1,11 +1,24 @@
 const { Client, GatewayIntentBits } = require("discord.js");
 const axios = require("axios");
 
-// Configuration
-const DISCORD_TOKEN = "DISCORD_TOKEN_HERE";
-const CHANNEL_ID = "CHANNEL_ID_HERE";
-const CITY = "Amman";
-const COUNTRY = "Jordan";
+// Load environment from .env.local when present
+try {
+  require("dotenv").config({ path: ".env.local" });
+} catch (err) {
+  throw err;
+}
+
+const DISCORD_TOKEN = process.env.DISCORD_TOKEN;
+const CHANNEL_ID = process.env.CHANNEL_ID || "1062755334223052931";
+const CITY = process.env.CITY || "Amman";
+const COUNTRY = process.env.COUNTRY || "Jordan";
+
+if (!DISCORD_TOKEN) {
+  console.error(
+    "Missing DISCORD_TOKEN. Set it in .env.local or environment variables."
+  );
+  process.exit(1);
+}
 
 const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
@@ -113,7 +126,11 @@ async function sendPrayerNotification(prayer, time) {
         },
       };
 
-      await channel.send({ embeds: [embed] });
+      await channel.send({
+        content: "@everyone",
+        embeds: [embed],
+        allowedMentions: { parse: ["everyone"] },
+      });
       console.log(`Sent notification for ${prayer} prayer at ${time}`);
     }
   } catch (error) {

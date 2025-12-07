@@ -19,14 +19,18 @@ This repository contains a simple Discord bot (entry: `bot.js`). It provides a m
 npm install
 ```
 
-2. Provide your bot token. Set the `DISCORD_TOKEN` environment variable, for example in PowerShell:
+2. Create a `.env.local` file at the project root (or edit the provided `.env.local`). The project will load it automatically using `dotenv`.
 
-```powershell
-$env:DISCORD_TOKEN = "YOUR_BOT_TOKEN"
-node bot.js
+Example `.env.local`:
+
+```text
+DISCORD_TOKEN=YOUR_BOT_TOKEN_HERE
+CHANNEL_ID=1062755334223052931
+CITY=Amman
+COUNTRY=Jordan
 ```
 
-Alternatively, you can use a `.env` loader or other config if you prefer—`bot.js` will need to be updated accordingly.
+3. Keep secrets out of version control — add `.env.local` to your `.gitignore`.
 
 ## Run
 
